@@ -1,6 +1,11 @@
 # SCM Version Maven Extension
 A maven 4 extension to manage project version from SCM (GIT) in a simple way
 
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/pretsadev/scm-version-maven-extension/snapshot.yml?logo=Github)
+![Maven Central Version](https://img.shields.io/maven-central/v/dev.pretsa/scm-version-maven-extension?logo=apache%20maven&link=https%3A%2F%2Fsearch.maven.org%2F%23search%7Cga%7C1%7Cg%3Adev.pretsa%20AND%20a%3Ascm-version-maven-extension)
+
+
+
 # What is it for?
 - Tracking project version from SCM (GIT) instead of explicitly being written in POMs.
 - `scm-version-maven-extension` does only one thing, compute the version and set it to `scm.version` property.
