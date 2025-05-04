@@ -1,0 +1,34 @@
+release:
+  github:
+    overwrite: true
+    changelog:
+      formatted: ALWAYS
+      preset: conventional-commits
+      contributors:
+        format: '- {{contributorName}} ({{contributorUsernameAsLink}})'
+
+signing:
+  active: ALWAYS
+
+deploy:
+  maven:
+    github:
+      github-packages-deployer:
+        active: ALWAYS
+        url: https://maven.pkg.github.com/{{repoOwner}}/{{repository}}
+        snapshotSupported: true
+        applyMavenCentralRules: true
+        stagingRepositories:
+          - target/staging-deploy
+
+    mavenCentral:
+      maven-central-deployer:
+        active: RELEASE
+        url: https://central.sonatype.com/api/v1/publisher
+        authorization: BASIC
+        snapshotSupported: true
+        applyMavenCentralRules: true
+        stagingRepositories:
+          - target/staging-deploy
+        verifyUrl: 'https://repo1.maven.org/maven2/{{path}}/{{filename}}'
+        deploymentId: b439b83c-593c-47af-aec9-39e9e52f6e4a

@@ -3,19 +3,37 @@ A maven 4 extension to manage project version from SCM (GIT) in a simple way
 
 # What is it for?
 - Tracking project version from SCM (GIT) instead of explicitly being written in POMs.
-- The extension does only one thing, compute the version and set it to `scm.version` property.
-- The extension is intended to be simple if it does not meet your requirements please check these awesome projects
+- `scm-version-maven-extension` does only one thing, compute the version and set it to `scm.version` property.
+- `scm-version-maven-extension` is intended to be simple if it does not meet your requirements please check these awesome projects
   - [Maveniverse Nisse](https://github.com/maveniverse/nisse)
   - [jgitver-maven-plugin](https://github.com/jgitver/jgitver-maven-plugin)
   - [maven-git-versioning-extension](https://github.com/qoomon/maven-git-versioning-extension)
   - [ci-friendly-flatten-maven-plugin](https://github.com/outbrain-inc/ci-friendly-flatten-maven-plugin)
+
+> [!IMPORTANT]  
+> `scm-version-maven-extension` **only** resolves and sets the versin during maven execution, it does not create new scm tags locally or remotely
+
+> [!TIP]
+> [JReleaser](https://jreleaser.org) is excellent tool to create scm tags and manage releases
 
 # Setup
 
 > [!IMPORTANT]  
 > This extension only works with Maven 4
 
-1. scm-version-maven-extension is a core extension, to be used it must be registered by adding it into `.mvn/extensions.xml` file
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User
+    User->>.mvn/extensions.xml: Add `scm-version-maven-extension`
+    User->>pom.xml: Set version as `scm.version` property
+    User->>+Maven: Use maven as usual
+    Maven-->>+scm-version-maven-extension: Loads extension
+    scm-version-maven-extension-->>-Maven: Compute version from Git and populate `scm.version` property
+    Maven->>-User: Version is present
+```
+
+1. `scm-version-maven-extension` is a core extension, to be used it must be registered by adding it into `.mvn/extensions.xml` file
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <extensions>
@@ -42,7 +60,7 @@ A maven 4 extension to manage project version from SCM (GIT) in a simple way
 </project>
 ```
 
-3. Use maven as usual, the extension will resolve `scm.version` property to the desired version on each run
+3. Use maven as usual, `scm-version-maven-extension` will resolve `scm.version` property to the desired version on each run
 ```
 [INFO] scm-version-maven-extension loaded
 [INFO] scm.version property computed to [1.2.4-SNAPSHOT] as the [NEXT PATCH SNAPSHOT]
@@ -58,45 +76,20 @@ A maven 4 extension to manage project version from SCM (GIT) in a simple way
 [INFO] scm.version property computed to [1.2.4-SNAPSHOT] as the [NEXT PATCH SNAPSHOT]
 ```
 
-# How to use
-To keep it simple the extension assumes that
+# Configurations
+
+To keep it simple `scm-version-maven-extension` assumes that
 - The project version is in [Semantic Version](https://semver.org/) style (MAJOR.MINOR.PATCH) .e.g. `1.2.3`
 - The project version has only two variant
   - RELEASE which has no suffix e.g. `1.2.3`
   - SNAPSHOT which has `-SNAPSHOT` suffix e.g. `1.2.3-SNAPSHOT`
-- The extension only work with annotated Git tags
+- `scm-version-maven-extension` only work with annotated Git tags
 
+## `scm-version-maven-extension` has 3 main options that can be combined to get the desired behaviour
 
-# Common warnings
-
-> [!INFO]  
-> When the extension is not able to load current project version from scm, a default version of `0.0.0` is assumed and a warning is logged.
-
-
-
-- Project path is not a valid git repository
-```
-[WARNING] Error loading tag at /project/path: One of setGitDir or setWorkTree must be called.
-```
-
-- Project repository does not have any commits yet
-```
-[WARNING] Error loading tag at /project/path: Ref HEAD cannot be resolved
-```
-
-- Project git repository does not contain any tags matching a semantic version pattern
-```
-[WARNING] Error loading tag at /project/path: No git tag matching supported glob [*[0-9]*.[0-9]*.[0-9]*]
-```
-
-
-
-# How it works
-
-## The extension has 3 main options that can be combined to get the desired behaviour
-
-### 1. Version type: This tells the extension what version to compute 
-- Defaults to `scm.next` if no option is supplied
+### 1. Version type: This tells `scm-version-maven-extension` what version to compute
+> [!NOTE]  
+> Defaults to `NEXT` if no option is supplied
 
 | Version type | Activate with | Description           |
 |--------------|---------------|-----------------------|
@@ -104,8 +97,9 @@ To keep it simple the extension assumes that
 | NEXT         | scm.next      | The *next* version    |
 
 
-### 2. Next version component: When version type is NEXT, this tell the extension what version component to increment
-- Defaults to `scm.patch` if no option is supplied
+### 2. Next version component: When version type is NEXT, this tell `scm-version-maven-extension` what version component to increment
+> [!NOTE]  
+> Defaults to `PATCH` if no option is supplied
 
 | Version type | Activate with | Description                                 |
 |--------------|---------------|---------------------------------------------|
@@ -114,8 +108,9 @@ To keep it simple the extension assumes that
 | MAJOR        | scm.major     | The major component e.g. `1.2.3` -> `2.0.0` |
 
 
-### 3. Version qualifier (variant): This tells the extension what variant to compute
-- Defaults to `scm.snapshot` if no option is supplied
+### 3. Version qualifier (variant): This tells `scm-version-maven-extension` what variant to compute
+> [!NOTE]  
+> Defaults to `SNAPSHOT` if no option is supplied
 
 | Version type | Activate with | Description                                                              |
 |--------------|---------------|--------------------------------------------------------------------------|
@@ -123,7 +118,8 @@ To keep it simple the extension assumes that
 | SNAPSHOT     | scm.snapshot  | Will compute the version adding `-SNAPSHOT` suffix e.g. `1.2.3-SNAPSHOT` |
 
 ## Shorthand options
-- Shorthand options are available for easier usage
+> [!TIP]  
+> Shorthand options are available for easier usage
 
 | Shorthand option        | Equivalent options                  |
 |-------------------------|-------------------------------------|
@@ -175,18 +171,26 @@ mvn verify -Dscm.next -Dscm.minor -Dscm.release
 - Next minor release version (shorthand) will compute the version to `1.3.0`
 ```
 mvn verify -Dscm.next.minor.release
-``` 
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor User
-    User->>.mvn/extensions.xml: Add scm-version-maven-extension
-    User->>pom.xml: Set version as `scm.version` property
-    User->>+Maven: Use maven as usual
-    Maven-->>+scm-version-maven-extension: Loads extension
-    scm-version-maven-extension-->>-Maven: Compute version from Git and populate `scm.version` property
-    Maven->>-User: Version is present
 ```
 
+# Common warnings
 
+> [!NOTE]
+> When `scm-version-maven-extension` is not able to load current project version from scm, a default version of `0.0.0` is assumed and a warning is logged.
+
+
+
+- Project path is not a valid git repository
+```
+[WARNING] Error loading tag at /project/path: One of setGitDir or setWorkTree must be called.
+```
+
+- Project repository does not have any commits yet
+```
+[WARNING] Error loading tag at /project/path: Ref HEAD cannot be resolved
+```
+
+- Project git repository does not contain any tags matching a semantic version pattern
+```
+[WARNING] Error loading tag at /project/path: No git tag matching supported glob [*[0-9]*.[0-9]*.[0-9]*]
+```
