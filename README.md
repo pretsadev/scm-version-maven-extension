@@ -11,10 +11,13 @@ A maven 4 extension to manage project version from SCM (GIT) in a simple way
   - [ci-friendly-flatten-maven-plugin](https://github.com/outbrain-inc/ci-friendly-flatten-maven-plugin)
 
 > [!IMPORTANT]  
-> `scm-version-maven-extension` **only** resolves and sets the versin during maven execution, it does not create new scm tags locally or remotely
+> `scm-version-maven-extension` **only** resolves and sets the version during maven execution, it does not create new scm tags locally or remotely
 
 > [!TIP]
 > [JReleaser](https://jreleaser.org) is excellent tool to create scm tags and manage releases
+
+> [!IMPORTANT]  
+> Tags created as result of GitHub releases are lightweight, currently `scm-version-maven-extension` only works with annotated tags
 
 # Setup
 

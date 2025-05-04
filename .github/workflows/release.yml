@@ -30,7 +30,7 @@ jobs:
           cache: maven
 
       - name: Build
-        run: ./mvnw -ntp -B deploy -Pspotless-check,publication -Dscm.${{ inputs.release_type }}
+        run: ./mvnw -ntp -B deploy -Pspotless-check,publication -Dscm.next.${{ inputs.release_type }}
 
       - name: Release
         env:

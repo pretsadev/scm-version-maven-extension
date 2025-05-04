@@ -4,7 +4,7 @@
 
   <groupId>dev.pretsa</groupId>
   <artifactId>scm-version-maven-extension</artifactId>
-  <version>0.0.1</version>
+  <version>${scm.version}</version>
 
   <name>PRETSA scm version maven extension</name>
   <description>Maven 4 extension to manage project version from scm</description>
