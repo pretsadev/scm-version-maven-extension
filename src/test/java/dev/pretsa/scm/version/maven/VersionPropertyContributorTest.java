@@ -1,7 +1,9 @@
-package dev.pretsa.scm.version;
+package dev.pretsa.scm.version.maven;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.pretsa.scm.version.Configuration;
+import dev.pretsa.scm.version.VersionProvider;
 import java.nio.file.Path;
 import java.time.Instant;
 import java.util.Map;

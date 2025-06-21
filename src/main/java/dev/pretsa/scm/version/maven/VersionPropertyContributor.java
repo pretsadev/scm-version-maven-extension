@@ -1,5 +1,8 @@
-package dev.pretsa.scm.version;
+package dev.pretsa.scm.version.maven;
 
+import dev.pretsa.scm.version.Configuration;
+import dev.pretsa.scm.version.ConfigurationBuilder;
+import dev.pretsa.scm.version.VersionProvider;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.maven.api.ProtoSession;

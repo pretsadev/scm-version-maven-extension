@@ -22,16 +22,16 @@
   <developers>
     <developer>
       <name>Ghazy Abdallah</name>
-      <email>ghazy@pretsa.com</email>
+      <email>ghazy@pretsa.dev</email>
       <organization>PRETSA</organization>
       <organizationUrl>https://pretsa.dev</organizationUrl>
     </developer>
   </developers>
 
   <scm>
-    <connection>scm:git:git://github.com//pretsadev/scm-version-maven-extension.git</connection>
-    <developerConnection>scm:git:ssh://github.com:/pretsadev/scm-version-maven-extension.git</developerConnection>
-    <url>https://github.com//pretsadev/scm-version-maven-extension</url>
+    <connection>scm:git:git@github.com:pretsadev/scm-version-maven-extension.git</connection>
+    <developerConnection>scm:git:git@github.com:pretsadev/scm-version-maven-extension.git</developerConnection>
+    <url>https://github.com/pretsadev/scm-version-maven-extension</url>
   </scm>
 
   <properties>
@@ -40,8 +40,8 @@
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+    <version.scm.verion.core>0.0.1</version.scm.verion.core>
     <version.maven>4.0.0-rc-3</version.maven>
-    <version.jgit>7.2.0.202503040940-r</version.jgit>
     <version.slf4j>2.0.17</version.slf4j>
     <version.junit>5.12.2</version.junit>
     <version.spotless>2.44.4</version.spotless>
@@ -49,18 +49,17 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>dev.pretsa</groupId>
+        <artifactId>scm-version-core</artifactId>
+        <version>${version.scm.verion.core}</version>
+      </dependency>
+
       <!--maven-->
       <dependency>
         <groupId>org.apache.maven</groupId>
         <artifactId>maven-api-spi</artifactId>
         <version>${version.maven}</version>
-      </dependency>
-
-      <!--jgit-->
-      <dependency>
-        <groupId>org.eclipse.jgit</groupId>
-        <artifactId>org.eclipse.jgit</artifactId>
-        <version>${version.jgit}</version>
       </dependency>
 
       <!--slf4j-->
@@ -87,17 +86,16 @@
   </dependencyManagement>
 
   <dependencies>
+    <dependency>
+      <groupId>dev.pretsa</groupId>
+      <artifactId>scm-version-core</artifactId>
+    </dependency>
+
     <!--maven-->
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-api-spi</artifactId>
       <scope>provided</scope>
-    </dependency>
-
-    <!--jgit-->
-    <dependency>
-      <groupId>org.eclipse.jgit</groupId>
-      <artifactId>org.eclipse.jgit</artifactId>
     </dependency>
 
     <!--slf4j-->
