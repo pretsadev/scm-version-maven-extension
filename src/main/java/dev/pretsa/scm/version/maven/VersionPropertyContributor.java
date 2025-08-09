@@ -25,7 +25,7 @@ public class VersionPropertyContributor implements PropertyContributor {
     private final VersionProvider versionProvider;
 
     /**
-     * Construct a {@link VersionPropertyContributor} passing in {@link VersionProvider} that will be used to compute version
+     * Construct a {@link VersionPropertyContributor} passing in {@link VersionProvider} that will be used to compute the version
      * @param versionProvider provider to compute version
      */
     @Inject

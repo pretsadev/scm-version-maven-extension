@@ -36,7 +36,7 @@ class VersionPropertyContributorTest {
         // when the input user properties have valid configuration present
         Map<String, String> inputUserProperties = Map.of();
 
-        // then output user properties should contain version computed by version provider
+        // then output user properties should contain the version computed by version provider
         Map<String, String> outputUserProperties =
                 versionPropertyContributor.contribute(new TestProtoSession(inputUserProperties));
         assertNotNull(outputUserProperties);

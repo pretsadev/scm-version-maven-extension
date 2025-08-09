@@ -28,4 +28,3 @@ deploy:
         stagingRepositories:
           - target/staging-deploy
         verifyUrl: 'https://repo.maven.apache.org/maven2/{{path}}/{{filename}}'
-        deploymentId: b439b83c-593c-47af-aec9-39e9e52f6e4a

@@ -1,5 +1,5 @@
 # SCM Version Maven Extension
-A maven 4 extension to manage project version from SCM (GIT) in a simple way
+A maven 4 extension to manage the project version from SCM (GIT) in a simple way
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/pretsadev/scm-version-maven-extension/snapshot.yml?logo=Github)
 ![Maven Central Version](https://img.shields.io/maven-central/v/dev.pretsa/scm-version-maven-extension?logo=apache%20maven&link=https%3A%2F%2Fsearch.maven.org%2F%23search%7Cga%7C1%7Cg%3Adev.pretsa%20AND%20a%3Ascm-version-maven-extension)
@@ -7,7 +7,7 @@ A maven 4 extension to manage project version from SCM (GIT) in a simple way
 
 
 # What is it for?
-- Tracking project version from SCM (GIT) instead of explicitly being written in POMs.
+- Tracking the project version from SCM (GIT) instead of explicitly being written in POMs.
 - `scm-version-maven-extension` does only one thing, compute the version and set it to `scm.version` property.
 - `scm-version-maven-extension` is intended to be simple if it does not meet your requirements please check these awesome projects
   - [Maveniverse Nisse](https://github.com/maveniverse/nisse)
@@ -19,10 +19,7 @@ A maven 4 extension to manage project version from SCM (GIT) in a simple way
 > `scm-version-maven-extension` **only** resolves and sets the version during maven execution, it does not create new scm tags locally or remotely
 
 > [!TIP]
-> [JReleaser](https://jreleaser.org) is excellent tool to create scm tags and manage releases
-
-> [!IMPORTANT]  
-> Tags created as result of GitHub releases are lightweight, currently `scm-version-maven-extension` only works with annotated tags
+> [JReleaser](https://jreleaser.org) is an excellent tool to create scm tags and manage releases
 
 # Setup
 
@@ -88,12 +85,12 @@ sequenceDiagram
 
 To keep it simple `scm-version-maven-extension` assumes that
 - The project version is in [Semantic Version](https://semver.org/) style (MAJOR.MINOR.PATCH) .e.g. `1.2.3`
-- The project version has only two variant
+- The project version has only two variants
   - RELEASE which has no suffix e.g. `1.2.3`
   - SNAPSHOT which has `-SNAPSHOT` suffix e.g. `1.2.3-SNAPSHOT`
-- `scm-version-maven-extension` only work with annotated Git tags
+- `scm-version-maven-extension` works with both annotated and lightweight Git tags
 
-## `scm-version-maven-extension` has 3 main options that can be combined to get the desired behaviour
+## `scm-version-maven-extension` has three main options that can be combined to get the desired behavior
 
 ### 1. Version type: This tells `scm-version-maven-extension` what version to compute
 > [!NOTE]  
@@ -105,7 +102,7 @@ To keep it simple `scm-version-maven-extension` assumes that
 | NEXT         | scm.next      | The *next* version    |
 
 
-### 2. Next version component: When version type is NEXT, this tell `scm-version-maven-extension` what version component to increment
+### 2. Next version component: When the version type is NEXT, this tell `scm-version-maven-extension` what version component to increment
 > [!NOTE]  
 > Defaults to `PATCH` if no option is supplied
 
@@ -184,7 +181,7 @@ mvn verify -Dscm.next.minor.release
 # Common warnings
 
 > [!NOTE]
-> When `scm-version-maven-extension` is not able to load current project version from scm, a default version of `0.0.0` is assumed and a warning is logged.
+> When `scm-version-maven-extension` is not able to load the current project version from scm, a default version of `0.0.0` is assumed and a warning is logged.
 
 
 

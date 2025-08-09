@@ -11,9 +11,6 @@ on:
           - patch.release
           - minor.release
           - major.release
-  # on any push to master branch
-  #push:
-  #  branches: [ master ]
 
 jobs:
   release:
