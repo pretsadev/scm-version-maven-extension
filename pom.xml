@@ -44,7 +44,7 @@
     <version.jgit>7.3.0.202506031305-r</version.jgit>
     <version.slf4j>2.0.17</version.slf4j>
     <version.junit>5.12.2</version.junit>
-    <version.spotless>2.44.4</version.spotless>
+    <version.awaitility>4.3.0</version.awaitility>
   </properties>
 
   <dependencyManagement>
@@ -83,6 +83,14 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
+      <!--awaitility-->
+      <dependency>
+        <groupId>org.awaitility</groupId>
+        <artifactId>awaitility</artifactId>
+        <version>${version.awaitility}</version>
+        <scope>test</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -116,6 +124,11 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.awaitility</groupId>
+      <artifactId>awaitility</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -177,12 +190,17 @@
             <configFile>jreleaser.yml</configFile>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.7</version>
+        </plugin>
 
         <!--code-format-->
         <plugin>
           <groupId>com.diffplug.spotless</groupId>
           <artifactId>spotless-maven-plugin</artifactId>
-          <version>${version.spotless}</version>
+          <version>2.44.4</version>
           <configuration>
             <java>
               <palantirJavaFormat></palantirJavaFormat>
@@ -239,6 +257,36 @@
                 </goals>
                 <configuration>
                   <attach>true</attach>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>coverage</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>prepare-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>report</id>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+                <configuration>
+                  <formats>
+                    <format>XML</format>
+                  </formats>
                 </configuration>
               </execution>
             </executions>

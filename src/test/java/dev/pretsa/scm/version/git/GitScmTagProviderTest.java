@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
+import org.awaitility.Awaitility;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.junit.jupiter.api.Test;
@@ -98,7 +99,13 @@ class GitScmTagProviderTest {
                     .setName("1.2.3")
                     .setMessage("First release")
                     .call();
-            TimeUnit.SECONDS.sleep(1);
+
+            // wait for time to flip to the next second before creating the next tag
+            Awaitility.await()
+                    .atMost(2, TimeUnit.SECONDS)
+                    .until(() ->
+                            git.log().call().iterator().next().getCommitTime() < System.currentTimeMillis() / 1000);
+
             git.tag()
                     .setAnnotated(true)
                     .setName("1.2.4")
