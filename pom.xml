@@ -40,8 +40,8 @@
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <version.maven>4.0.0-rc-3</version.maven>
-    <version.jgit>7.2.0.202503040940-r</version.jgit>
+    <version.maven>4.0.0-rc-4</version.maven>
+    <version.jgit>7.3.0.202506031305-r</version.jgit>
     <version.slf4j>2.0.17</version.slf4j>
     <version.junit>5.12.2</version.junit>
     <version.spotless>2.44.4</version.spotless>
