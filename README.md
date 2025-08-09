@@ -1,8 +1,13 @@
 # SCM Version Maven Extension
 A maven 4 extension to manage the project version from SCM (GIT) in a simple way
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/pretsadev/scm-version-maven-extension/snapshot.yml?logo=Github)
-![Maven Central Version](https://img.shields.io/maven-central/v/dev.pretsa/scm-version-maven-extension?logo=apache%20maven&link=https%3A%2F%2Fsearch.maven.org%2F%23search%7Cga%7C1%7Cg%3Adev.pretsa%20AND%20a%3Ascm-version-maven-extension)
+[![Maven Central Version](https://img.shields.io/maven-central/v/dev.pretsa/scm-version-maven-extension?logo=apache%20maven&link=https%3A%2F%2Fsearch.maven.org%2F%23search%7Cga%7C1%7Cg%3Adev.pretsa%20AND%20a%3Ascm-version-maven-extension)](https://central.sonatype.com/artifact/dev.pretsa/scm-version-maven-extension)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/pretsadev/scm-version-maven-extension/snapshot.yml?logo=Github)](https://github.com/pretsadev/scm-version-maven-extension/actions/workflows/snapshot.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=pretsadev_scm-version-maven-extension&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=pretsadev_scm-version-maven-extension)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=pretsadev_scm-version-maven-extension&metric=bugs)](https://sonarcloud.io/summary/new_code?id=pretsadev_scm-version-maven-extension)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=pretsadev_scm-version-maven-extension&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=pretsadev_scm-version-maven-extension)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=pretsadev_scm-version-maven-extension&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=pretsadev_scm-version-maven-extension)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=pretsadev_scm-version-maven-extension&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=pretsadev_scm-version-maven-extension)
 
 
 
